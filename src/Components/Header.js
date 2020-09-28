@@ -19,7 +19,7 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem 0px;
+  padding: 1.2rem 0px;
   z-index: 2;
 `;
 

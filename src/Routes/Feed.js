@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
 import Loader from '../Components/Loader';
-import Post from './Post';
+import Post from '../Components/Post';
 
 const FEED_QUERY = gql`
   {
@@ -46,9 +46,6 @@ const Wrapper = styled.div`
 
 export default () => {
   const { data, loading } = useQuery(FEED_QUERY);
-  if (data) {
-    console.log(data.viewFeed);
-  }
   return (
     <Wrapper>
       <Helmet>
@@ -62,14 +59,14 @@ export default () => {
           <Post
             key={post.id}
             id={post.id}
-            user={post.user}
-            files={post.files}
             location={post.location}
             caption={post.caption}
+            user={post.user}
+            files={post.files}
             isLiked={post.isLiked}
             likeCount={post.likeCount}
             comments={post.comments}
-            createdAt={post.createdAt}
+            createdAt={new Date(post.createdAt).toLocaleString()}
           />
         ))}
     </Wrapper>

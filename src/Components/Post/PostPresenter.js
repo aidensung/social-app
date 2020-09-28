@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import TextareaAutosize from 'react-autosize-textarea';
 import BoldText from '../BoldText';
 import Avatar from '../Avatar';
 import { HeartFull, HeartEmpty, Comment } from '../Icons';
@@ -27,10 +28,25 @@ const Location = styled.span`
   font-size: 0.75rem;
 `;
 
-const Files = styled.div``;
+const Files = styled.div`
+  position: relative;
+  padding-bottom: 32rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+`;
 
 const File = styled.img`
-  max-width: 100%;
+  height: 32rem;
+  position: absolute;
+  top: 0;
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
+  opacity: ${(props) => (props.showing ? 1 : 0)};
+  transition: opacity 0.5s linear;
 `;
 
 const Button = styled.span`
@@ -61,6 +77,17 @@ const Timestamp = styled.span`
   border-bottom: ${(props) => props.theme.lightGreyColor} 1px solid;
 `;
 
+const Textarea = styled(TextareaAutosize)`
+  border: none;
+  width: 100%;
+  resize: none;
+  font-size: 0.875rem;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export default ({
   user: { username, avatar },
   location,
@@ -68,6 +95,8 @@ export default ({
   isLiked,
   likeCount,
   createdAt,
+  newComment,
+  currentItem,
 }) => (
   <Post>
     <Header>
@@ -78,7 +107,15 @@ export default ({
       </UserColumn>
     </Header>
     <Files>
-      {files && files.map((file) => <File id={file.id} src={file.url} />)}
+      {files &&
+        files.map((file, index) => (
+          <File
+            key={file.id}
+            id={file.id}
+            src={file.url}
+            showing={index === currentItem}
+          />
+        ))}
     </Files>
     <Meta>
       <Buttons>
@@ -87,8 +124,9 @@ export default ({
           <Comment />
         </Button>
       </Buttons>
-      <FatText text={likeCount === 1 ? '1 like' : `${likeCount} likes`} />
+      <BoldText text={likeCount === 1 ? '1 like' : `${likeCount} likes`} />
       <Timestamp>{createdAt}</Timestamp>
+      <Textarea placeholder={'Add a comment...'} {...newComment} />
     </Meta>
   </Post>
 );

@@ -24,11 +24,19 @@ const Container = styled.div`
   border-radius: 50%;
 `;
 
-const Avatar = ({ size = 'sm', url }) => <Container size={size} url={url} />;
+const Avatar = ({ size = 'sm', url }) => (
+  <Container
+    size={size}
+    url={
+      (url =
+        'https://cdns.iconmonstr.com/wp-content/assets/preview/2019/240/iconmonstr-cat-4.png')
+    }
+  />
+);
 
 Avatar.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
 };
 
 export default Avatar;
