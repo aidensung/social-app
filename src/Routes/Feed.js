@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
@@ -50,6 +51,9 @@ export default () => {
   }
   return (
     <Wrapper>
+      <Helmet>
+        <title>Feed | LikeLikes</title>
+      </Helmet>
       {loading && <Loader />}
       {!loading &&
         data &&
