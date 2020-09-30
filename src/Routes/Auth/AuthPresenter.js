@@ -67,7 +67,12 @@ export default ({
             <title>Log In | LikeLikes</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={'Email'} {...email} type="email" />
+            <Input
+              placeholder={'Email'}
+              value={email.value}
+              onChange={email.onChange}
+              type="email"
+            />
             <Button text={'Log in'} />
           </form>
         </>
@@ -78,10 +83,27 @@ export default ({
             <title>Sign Up | LikeLikes</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={'First Name'} {...firstName} />
-            <Input placeholder={'Last Name'} {...lastName} />
-            <Input placeholder={'Email'} {...email} type="email" />
-            <Input placeholder={'Username'} {...username} />
+            <Input
+              placeholder={'First Name'}
+              value={firstName.value}
+              onChange={firstName.onChange}
+            />
+            <Input
+              placeholder={'Last Name'}
+              value={lastName.value}
+              onChange={lastName.onChange}
+            />
+            <Input
+              placeholder={'Email'}
+              value={email.value}
+              onChange={email.onChange}
+              type="email"
+            />
+            <Input
+              placeholder={'Username'}
+              value={username.value}
+              onChange={username.onChange}
+            />
             <Button text={'Sign up'} />
           </form>
         </>
@@ -94,7 +116,8 @@ export default ({
           <form onSubmit={onSubmit}>
             <Input
               placeholder={'Paste your login secret'}
-              {...secret}
+              value={secret.value}
+              onChange={secret.onChange}
               required
             />
             <Button text={'Confirm'} />

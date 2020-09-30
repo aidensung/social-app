@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
-import { gql } from 'apollo-boost';
 import Input from './Input';
 import useInput from '../Hooks/useInput';
 import { ExploreEmpty, HeartEmpty, Logo, User } from './Icons';
 import { useQuery } from '@apollo/client';
+import { viewMe } from '../SharedQueries';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -79,14 +79,6 @@ const HeaderLink = styled(Link)`
   }
 `;
 
-const viewMe = gql`
-  {
-    viewMe {
-      username
-    }
-  }
-`;
-
 const Header = ({ history }) => {
   const search = useInput('');
   const { data } = useQuery(viewMe);
@@ -106,7 +98,11 @@ const Header = ({ history }) => {
         </HeaderColumn>
         <HeaderColumn>
           <form onSubmit={onSubmitSearch}>
-            <SearchInput {...search} placeholder="Search" />
+            <SearchInput
+              value={search.value}
+              onChange={search.onChange}
+              placeholder="Search"
+            />
           </form>
         </HeaderColumn>
         <HeaderColumn>

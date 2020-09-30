@@ -6,7 +6,9 @@ const Text = styled.span`
   font-weight: 600;
 `;
 
-const BoldText = ({ text }) => <Text>{text}</Text>;
+const BoldText = ({ text, className }) => (
+  <Text className={className}>{text}</Text>
+);
 
 BoldText.propTypes = {
   text: PropTypes.string.isRequired,

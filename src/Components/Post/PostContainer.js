@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../../Hooks/useInput';
 import PostPresenter from './PostPresenter';
+import { useMutation } from '@apollo/client';
+import { ADD_COMMENT, TOGGLE_LIKE } from './PostQueries';
+import { toast } from 'react-toastify';
 
 const PostContainer = ({
   id,
@@ -17,7 +20,16 @@ const PostContainer = ({
   const [isLikedInState, setIsLiked] = useState(isLiked);
   const [likeCountInState, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
+  const [commentsInState, setCommentsInState] = useState([]);
   const comment = useInput('');
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
+    variables: {
+      postId: id,
+    },
+  });
+  const [addCommentMutation] = useMutation(ADD_COMMENT, {
+    variables: { postId: id, text: comment.value },
+  });
 
   const slide = useCallback(() => {
     const numberOfFiles = files.length;
@@ -31,6 +43,33 @@ const PostContainer = ({
   useEffect(() => {
     slide();
   }, [currentItem, slide]);
+
+  const toggleLike = () => {
+    toggleLikeMutation();
+    if (isLikedInState === true) {
+      setIsLiked(false);
+      setLikeCount(likeCountInState - 1);
+    } else {
+      setIsLiked(true);
+      setLikeCount(likeCountInState + 1);
+    }
+  };
+
+  const onKeyPress = async (e) => {
+    const { which } = e;
+    if (which === 13) {
+      e.preventDefault();
+      try {
+        const {
+          data: { addComment },
+        } = await addCommentMutation();
+        setCommentsInState([...commentsInState, addComment]);
+        comment.setValue('');
+      } catch {
+        toast.error("Can't add comment");
+      }
+    }
+  };
 
   return (
     <PostPresenter
@@ -46,6 +85,9 @@ const PostContainer = ({
       setIsLiked={setIsLiked}
       setLikeCount={setLikeCount}
       currentItem={currentItem}
+      toggleLike={toggleLike}
+      onKeyPress={onKeyPress}
+      commentsInState={commentsInState}
     />
   );
 };
