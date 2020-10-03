@@ -13,6 +13,10 @@ const Footer = styled.footer`
 
 const List = styled.ul`
   display: flex;
+
+  span {
+    margin-left: 0.5rem;
+  }
 `;
 
 const ListItem = styled.li`
@@ -33,39 +37,25 @@ export default () => (
   <Footer>
     <List>
       <ListItem>
-        <Link href="#">about</Link>
+        <Link href="#">home</Link>
       </ListItem>
       <ListItem>
-        <Link href="#">help</Link>
+        <Link href="https://aidensung.github.io/portfolio/" target="_blank">
+          portfolio
+        </Link>
       </ListItem>
       <ListItem>
-        <Link href="#">press</Link>
+        <Link href="https://github.com/aidensung" target="_blank">
+          github
+        </Link>
       </ListItem>
       <ListItem>
-        <Link href="#">api</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">jobs</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">privacy</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">terms</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">locations</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">top accounts</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">hashtags</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">language</Link>
+        <Link href="https://www.linkedin.com/in/aidensung/" target="_blank">
+          linkedin
+        </Link>
       </ListItem>
       <Copyright>&copy; {new Date().getFullYear()} LIKE LIKES</Copyright>
+      <span>By Aiden</span>
     </List>
   </Footer>
 );

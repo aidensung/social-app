@@ -19,24 +19,18 @@ const getSize = (size) => {
 
 const Container = styled.div`
   ${(props) => getSize(props.size)}
-  background-image:url(${(props) => props.url});
+  background-image: url(${(props) => props.url});
   background-size: cover;
   border-radius: 50%;
 `;
 
-const Avatar = ({ size = 'sm', url }) => (
-  <Container
-    size={size}
-    url={
-      (url =
-        'https://cdns.iconmonstr.com/wp-content/assets/preview/2019/240/iconmonstr-cat-4.png')
-    }
-  />
-);
+const Avatar = ({ size = 'sm', url, className }) => {
+  return <Container className={className} size={size} url={url} />;
+};
 
 Avatar.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  url: PropTypes.string,
+  url: PropTypes.string.isRequired,
 };
 
 export default Avatar;

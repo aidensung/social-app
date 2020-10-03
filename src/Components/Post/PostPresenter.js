@@ -67,6 +67,13 @@ const Buttons = styled.div`
   margin-bottom: 0.625rem;
 `;
 
+const Caption = styled.div`
+  margin-top: 0.625rem;
+  span {
+    margin-right: 0.3125rem;
+  }
+`;
+
 const Timestamp = styled.span`
   font-weight: 400;
   text-transform: uppercase;
@@ -103,6 +110,7 @@ const Comment = styled.li`
 export default ({
   user: { username, avatar },
   location,
+  caption,
   files,
   isLiked,
   likeCount,
@@ -143,6 +151,10 @@ export default ({
         </Button>
       </Buttons>
       <BoldText text={likeCount === 1 ? '1 like' : `${likeCount} likes`} />
+      <Caption>
+        <BoldText text={username} />
+        {caption}
+      </Caption>
       {comments && (
         <Comments>
           {comments.map((comment) => (
