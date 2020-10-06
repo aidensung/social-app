@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Auth from '../Routes/Auth';
 import Feed from '../Routes/Feed';
 import Explore from '../Routes/Explore';
 import Search from '../Routes/Search';
 import Profile from '../Routes/Profile';
 import Notifications from '../Routes/Notifications';
+import EachPost from './EachPost';
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -14,13 +15,16 @@ const LoggedInRoutes = () => (
     <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
     <Route path="/notifications" component={Notifications} />
-    <Route path="/:username" component={Profile} />
+    <Route exact path="/profile/:username" component={Profile} />
+    <Route exact path="/post/:postId" component={EachPost} />
+    <Redirect from="*" to="/" />
   </Switch>
 );
 
 const LoggedOutRoutes = () => (
   <Switch>
     <Route exact path="/" component={Auth} />
+    <Redirect from="*" to="/" />
   </Switch>
 );
 

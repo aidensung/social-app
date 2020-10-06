@@ -6,6 +6,8 @@ import Avatar from '../../Components/Avatar';
 import BoldText from '../../Components/BoldText';
 import FollowButton from '../../Components/FollowButton';
 import SquarePost from '../../Components/SquarePost';
+import Button from '../../Components/Button';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   min-height: 73vh;
@@ -65,7 +67,7 @@ const Posts = styled.div`
   grid-auto-rows: 18rem;
 `;
 
-export default ({ loading, data }) => {
+export default ({ loading, logOut, data }) => {
   if (loading === true) {
     return (
       <Wrapper style={{ display: 'flex', alignItems: 'center' }}>
@@ -102,7 +104,11 @@ export default ({ loading, data }) => {
           <HeaderColumn>
             <UsernameRow>
               <Username>{username}</Username>
-              {!isMyself && <FollowButton isFollowing={isFollowing} id={id} />}
+              {isMyself ? (
+                <Button onClick={logOut} text="Log Out" />
+              ) : (
+                <FollowButton isFollowing={isFollowing} id={id} />
+              )}
             </UsernameRow>
             <Counts>
               <Count>
@@ -126,12 +132,14 @@ export default ({ loading, data }) => {
         <Posts>
           {posts &&
             posts.map((post) => (
-              <SquarePost
-                key={post.id}
-                likeCount={post.likeCount}
-                commentCount={post.commentCount}
-                file={post.files[0]}
-              />
+              <Link key={post.id} to={`/post/${post.id}`}>
+                <SquarePost
+                  key={post.id}
+                  likeCount={post.likeCount}
+                  commentCount={post.commentCount}
+                  file={post.files[0]}
+                />
+              </Link>
             ))}
         </Posts>
       </Wrapper>

@@ -5,7 +5,7 @@ import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
 const Wrapper = styled.div`
-  min-height: 80vh;
+  min-height: 73vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,7 +73,7 @@ export default ({
               onChange={email.onChange}
               type="email"
             />
-            <Button text={'Log in'} />
+            <Button text={'Log In'} />
           </form>
         </>
       )}
@@ -104,7 +104,7 @@ export default ({
               value={username.value}
               onChange={username.onChange}
             />
-            <Button text={'Sign up'} />
+            <Button text={'Sign Up'} />
           </form>
         </>
       )}

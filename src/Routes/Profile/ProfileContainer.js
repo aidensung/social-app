@@ -1,7 +1,7 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import withRouter from 'react-router-dom/withRouter';
-import { useQuery } from '@apollo/client';
+import { withRouter } from 'react-router-dom';
+import { useMutation, useQuery } from '@apollo/client';
 import ProfilePresenter from './ProfilePresenter';
 
 const GET_USER = gql`
@@ -29,13 +29,20 @@ const GET_USER = gql`
   }
 `;
 
-export default withRouter(
-  ({
-    match: {
-      params: { username },
-    },
-  }) => {
-    const { data, loading } = useQuery(GET_USER, { variables: { username } });
-    return <ProfilePresenter loading={loading} data={data} />;
+const LOG_OUT = gql`
+  mutation logUserOut {
+    logUserOut @client
+  }
+`;
+
+const ProfileContainer = ({
+  match: {
+    params: { username },
   },
-);
+}) => {
+  const { data, loading } = useQuery(GET_USER, { variables: { username } });
+  const [logOut] = useMutation(LOG_OUT);
+  return <ProfilePresenter loading={loading} logOut={logOut} data={data} />;
+};
+
+export default withRouter(ProfileContainer);

@@ -20,6 +20,8 @@ const Overlay = styled.div`
 const Container = styled.div`
   background-image: url(${(props) => props.bg});
   background-size: cover;
+  width: 100%;
+  height: 100%;
   &:hover {
     ${Overlay} {
       opacity: 1;

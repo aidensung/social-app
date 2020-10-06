@@ -120,7 +120,7 @@ const Header = ({ history }) => {
               <User />
             </HeaderLink>
           ) : (
-            <HeaderLink to={data.viewMe.username}>
+            <HeaderLink to={`/profile/${data.viewMe.username}`}>
               <User />
             </HeaderLink>
           )}
