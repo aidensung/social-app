@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import BoldText from '../../Components/BoldText';
 import Loader from '../../Components/Loader';
@@ -29,8 +30,6 @@ const PostSection = styled(Section)`
 `;
 
 const SearchPresenter = ({ searchTerm, loading, data }) => {
-  const avatarDefault =
-    'https://cdns.iconmonstr.com/wp-content/assets/preview/2019/240/iconmonstr-cat-4.png';
   if (searchTerm === undefined) {
     return (
       <Wrapper>
@@ -46,6 +45,9 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
   } else if (data && data.searchUser && data.searchPost) {
     return (
       <Wrapper>
+        <Helmet>
+          <title>{searchTerm} | Search Result</title>
+        </Helmet>
         <Section>
           {data.searchUser.length === 0 ? (
             <BoldText text="No users found" />
@@ -56,7 +58,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
                 id={user.id}
                 username={user.username}
                 isFollowing={user.isFollowing}
-                url={user.avatar || avatarDefault}
+                url={user.avatar}
                 isMyself={user.isMyself}
               />
             ))

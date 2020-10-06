@@ -4,6 +4,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import BoldText from '../BoldText';
 import Avatar from '../Avatar';
 import { HeartFull, HeartEmpty, Comment as CommentIcon } from '../Icons';
+import { Link } from 'react-router-dom';
 
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
@@ -11,6 +12,9 @@ const Post = styled.div`
   max-width: 37.5rem;
   margin-bottom: 1.6rem;
   user-select: none;
+  a {
+    color: inherit;
+  }
 `;
 
 const Header = styled.header`
@@ -126,7 +130,9 @@ export default ({
     <Header>
       <Avatar size="sm" url={avatar} />
       <UserColumn>
-        <BoldText text={username} />
+        <Link to={`/${username}`}>
+          <BoldText text={username} />
+        </Link>
         <Location>{location}</Location>
       </UserColumn>
     </Header>

@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+const avatarDefault =
+  'https://cdns.iconmonstr.com/wp-content/assets/preview/2019/240/iconmonstr-cat-4.png';
+
 const getSize = (size) => {
   let number;
   if (size === 'sm') {
@@ -25,7 +28,9 @@ const Container = styled.div`
 `;
 
 const Avatar = ({ size = 'sm', url, className }) => {
-  return <Container className={className} size={size} url={url} />;
+  return (
+    <Container className={className} size={size} url={url || avatarDefault} />
+  );
 };
 
 Avatar.propTypes = {

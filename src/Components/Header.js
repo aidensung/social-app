@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import Input from './Input';
 import useInput from '../Hooks/useInput';
-import { ExploreEmpty, HeartEmpty, Logo, User } from './Icons';
+import { ExploreEmpty, HeartEmpty, HomeEmpty, Logo, User } from './Icons';
 import { useQuery } from '@apollo/client';
 import { viewMe } from '../SharedQueries';
 
@@ -75,7 +75,7 @@ const SearchInput = styled(Input)`
 
 const HeaderLink = styled(Link)`
   &:not(:last-child) {
-    margin-right: 1.8rem;
+    margin-right: 1.5rem;
   }
 `;
 
@@ -106,6 +106,9 @@ const Header = ({ history }) => {
           </form>
         </HeaderColumn>
         <HeaderColumn>
+          <HeaderLink to="/">
+            <HomeEmpty />
+          </HeaderLink>
           <HeaderLink to="/explore">
             <ExploreEmpty />
           </HeaderLink>
